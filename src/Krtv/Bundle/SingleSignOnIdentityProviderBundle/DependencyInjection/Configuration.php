@@ -18,9 +18,14 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $builder = new TreeBuilder();
+        $builder = new TreeBuilder('krtv_single_sign_on_identity_provider');
+        
+        $root = method_exists($builder, 'getRootNode')
+            ? $builder->getRoorNode()
+            : $builder->root('krtv_single_sign_on_identity_provider')
+        ;
 
-        $builder->root('krtv_single_sign_on_identity_provider')
+        $root
             ->children()
                 ->scalarNode('host')
                     ->isRequired()
